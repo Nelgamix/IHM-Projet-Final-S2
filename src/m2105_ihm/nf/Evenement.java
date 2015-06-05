@@ -23,10 +23,8 @@ public class Evenement implements java.io.Serializable {
     private int dateJour;
     private Mois dateMois;
     private int dateAnnee;
-    private int dateHeure;
-    private int dateMinute;
     
-    private ArrayList<Contact> participants;    
+    private ArrayList<Contact> participants;
 
     /**
      * Constructeur
@@ -36,8 +34,6 @@ public class Evenement implements java.io.Serializable {
         this.dateJour = 1;
         this.dateMois = Mois.JANVIER;
         this.dateAnnee = 1970;
-        this.dateHeure = 21;
-        this.dateMinute = 42;
         this.participants = new ArrayList<Contact>();        
     }
     
@@ -145,19 +141,5 @@ public class Evenement implements java.io.Serializable {
     public String toString() {
         return dateJour + "/" + (dateMois.ordinal() + 1) + "/" + dateAnnee + " : " + intitule;
     }
-
-    public int getDateHeure() {
-        return dateHeure;
-    }
-
-    public int getDateMinute() {
-        return dateMinute;
-    }
-
-    public void setDateHeure(int dateHeure, int dateMinutes) {
-        this.dateHeure = dateHeure;
-        this.dateMinute = dateMinutes;
-    }
-    
     
 }

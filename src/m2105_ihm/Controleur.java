@@ -181,9 +181,9 @@ public class Controleur {
             carnetUI.ajouterGroupe(g);
         }
         
-        /*for(Evenement e : nf.getEvenements()) {
+        for(Evenement e : nf.getEvenements()) {
             planningUI.ajouterEvt(e);
-        }*/
+        }
         
         carnetUI.show();
     }

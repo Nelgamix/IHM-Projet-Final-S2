@@ -11,6 +11,7 @@ import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -31,8 +32,6 @@ public class FicheCreationEvt extends JFrame {
     private JComboBox monsterKill;
     private JComboBox monsterCat;
     private JComboBox monsterDog;
-    private JComboBox monsterLicorne;
-    private JComboBox monsterTiger;
     private JButton valider;
     private JButton annuler;
     protected PlanningUI planning;
@@ -56,7 +55,11 @@ public class FicheCreationEvt extends JFrame {
         
         io.add(butttt, BorderLayout.SOUTH);
         
-        JPanel ios = new JPanel(new GridLayout(3, 2, 10, 10));
+        JPanel ios = new JPanel(new GridLayout(2, 2, 10, 10));
+	ios.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createTitledBorder(
+                    "Créer évènement"),
+                BorderFactory.createEmptyBorder(10,10,10,10)));
         
         JLabel textOS = new JLabel("Intitulé");
         
@@ -85,24 +88,6 @@ public class FicheCreationEvt extends JFrame {
         monsterDog = new JComboBox(items3);
         dateOS.add(monsterDog);
         
-        JPanel heureOS = new JPanel(new GridLayout(1, 2, 5, 5));
-        
-        Integer[] items4 = new Integer[24] ;
-        for (int i=0; i<24; i++) {
-            items4[i]=i;
-        }
-   
-        Integer[] items5 = new Integer[60] ;
-        for (int i=0; i<60; i++) {
-            items5[i]=i;
-        }
-        
-        monsterLicorne = new JComboBox(items4);
-        heureOS.add(monsterLicorne);
-        
-        monsterTiger = new JComboBox(items5);
-        heureOS.add(monsterTiger);      
-        
         io.add(ios, BorderLayout.CENTER);
         
         ios.add(textOS);
@@ -110,13 +95,14 @@ public class FicheCreationEvt extends JFrame {
         textOS = new JLabel("Date");
         ios.add(textOS);
         ios.add(dateOS);
-        textOS = new JLabel("Heure");
-        ios.add(textOS);
-        ios.add(heureOS);
         
         this.add(io);
         
         initListener();
+    }
+    
+    private void initComponents() {
+	
     }
     
     public void initListener() {
@@ -144,12 +130,9 @@ public class FicheCreationEvt extends JFrame {
         int jour = monsterKill.getSelectedIndex();
         Mois mois = (Mois) monsterCat.getSelectedItem();
         int annee = monsterDog.getSelectedIndex() + 2015;
-        int heure = monsterLicorne.getSelectedIndex();
-        int minute = monsterTiger.getSelectedIndex();
         
         ev.setDate(jour, mois, annee);
         ev.setIntitule(intitule);
-        ev.setDateHeure(heure, minute);
         
         System.out.println("Evenement crée: " + ev.getIntitule() + " :: " + ev.getDateAnnee());
     }

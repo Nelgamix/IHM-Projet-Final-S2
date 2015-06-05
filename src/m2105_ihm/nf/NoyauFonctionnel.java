@@ -235,7 +235,7 @@ public class NoyauFonctionnel {
             
             oos.writeObject(contacts);
             oos.writeObject(groupes);
-            //oos.writeObject(evenements);
+            oos.writeObject(evenements);
             
         }
         catch (Exception e) {
@@ -276,7 +276,7 @@ public class NoyauFonctionnel {
                 
                 contacts = (ArrayList<Contact>) ois.readObject();
                 groupes = (ArrayList<GroupeContacts>) ois.readObject();
-                //evenements = (ArrayList<Evenement>) ois.readObject();
+                evenements = (ArrayList<Evenement>) ois.readObject();
             }             
             catch(Exception e) {
                 System.out.println("LOAD" + e);
