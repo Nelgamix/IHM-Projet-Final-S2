@@ -60,7 +60,7 @@ public class PlanningUI extends JPanel {
      
         this.setLayout(new GridBagLayout());
 	
-	String[] evt = {"Bijour", "Gaga"};
+	String[] evt = {"Bijour", "Gaga", "Gogo"};
 	
 	JPanel listPanel = new JPanel();
 	listPanel.setBorder(BorderFactory.createCompoundBorder(
