@@ -28,7 +28,7 @@ public class FenetreUI extends JFrame {
      */
     private JMenuItem [] menuFichier;
     private JMenuItem [] menuContacts;
-    private JMenuItem [] menuEvenements; // à utiliser pour le mini projet    
+    private JMenuItem [] menuEvenements; 
     
     private JMenuBar barreMenu;
     
@@ -234,7 +234,7 @@ public class FenetreUI extends JFrame {
      */
     public void addTab(JPanel onglet, String titre) {
         tabs.addTab(titre, onglet);
-    }    
+    }
     
     /**
     * Indique si un contact ou un groupe est sélectionné
@@ -337,11 +337,11 @@ public class FenetreUI extends JFrame {
         }
     }            
 
-    private JTabbedPane tabs;    
-    private Controleur controleur;    
+    private JTabbedPane tabs;
+    private Controleur controleur;
     private boolean contactSelected = true;
-    private boolean evtSelected = false;    
+    private boolean evtSelected = false;
     private static final int MENU_FICHIER    = 0;
     private static final int MENU_CONTACTS   = 1;
-    private static final int MENU_EVENEMENTS = 2;        
+    private static final int MENU_EVENEMENTS = 2;
 }

@@ -12,7 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import m2105_ihm.nf.*;  
@@ -24,7 +23,6 @@ import m2105_ihm.ui.CarnetUI;
 public class FicheContactUI extends JPanel {
 
     private CarnetUI         carnet;
-    //private Contact cA;
     
     private JTextField  champNom;
     private JTextField  champPrenom;

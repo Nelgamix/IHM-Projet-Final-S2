@@ -11,7 +11,6 @@ import m2105_ihm.nf.NoyauFonctionnel;
 import m2105_ihm.ui.BoiteDialogUI;
 import m2105_ihm.ui.CarnetUI;
 import m2105_ihm.ui.FenetreUI;
-import m2105_ihm.ui.FicheCreationEvt;
 import m2105_ihm.ui.PlanningUI;
 
 /**
@@ -105,19 +104,21 @@ public class Controleur {
      * Crée un nouvel événement
      */
     public void creerEvenement() {
-              
-        FicheCreationEvt evt = new FicheCreationEvt(planningUI);
+	Evenement evt = new Evenement();
 	
-	evt.setVisible(true);
+	planningUI.ajouterEvt(evt);
     }
 
     /**
      * Supprime un événement existant
      */
     public void supprimerEvenement() {
-       
-       /** Projet **/
-       
+	Evenement e = planningUI.getSelectedEvt();
+	
+	nf.removeEvenement(e);
+	planningUI.removeEvenement(e);
+	
+	setEvtSelected(false);
     }
     
     /**

@@ -35,7 +35,6 @@ public class PlanningUI extends JPanel {
      */
     private Controleur       controleur;
     private FicheEvtUI       ficheEvt;
-    private JList	     list;
 
     /** 
      * Constructeur : initialise les composants de l'IHM pour les événements
@@ -57,51 +56,9 @@ public class PlanningUI extends JPanel {
          * Fiche événement
          */        
         ficheEvt = new FicheEvtUI(this);
-     
-        this.setLayout(new GridBagLayout());
 	
-	String[] evt = {"Bijour", "Gaga", "Gogo"};
-	
-	JPanel listPanel = new JPanel();
-	listPanel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createTitledBorder(
-                    "Evenements"),
-                BorderFactory.createEmptyBorder(10,10,10,10)));
-	
-	list = new JList(evt);
-	list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	list.setLayoutOrientation(JList.VERTICAL);
-	list.setVisibleRowCount(-1);
-	list.setPreferredSize(new Dimension(150, 400));
-	JScrollPane listScroller = new JScrollPane(list);
-	listScroller.setPreferredSize(new Dimension(800, 80));
-	
-	listPanel.add(list);
-	
-	GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.LINE_START;
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weightx = 0;
-	this.add(listPanel, gbc);
-	
-	JPanel pan2 = new JPanel();
-	pan2.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createTitledBorder(
-                    "Infos"),
-                BorderFactory.createEmptyBorder(10,10,10,10)));
-	pan2.add(new JLabel("QZFFQ"));
-	
-	gbc.fill = GridBagConstraints.BOTH;
-	gbc.gridx = 1;
-        gbc.gridy = 0;
-	gbc.weightx = 0.8;
-	gbc.weighty = 1;
-	
-	this.add(pan2, gbc);
+	this.add(ficheEvt);
     }
-    
     /**
      * Ajoute une entrée dans la liste de événements
      * @param title texte affiché dans la liste pour un contact
@@ -110,7 +67,7 @@ public class PlanningUI extends JPanel {
     public boolean ajouterEvt(Evenement evt) {
         if (evt == null) { return false; }
         
-        /** Projet à completer **/
+        ficheEvt.ajouterEvenementList(evt);
             
         return true;
     }
@@ -131,9 +88,14 @@ public class PlanningUI extends JPanel {
      * Retourne l'événement sélectionné
      */
     public Evenement getSelectedEvt() {    
-        
-        /** Projet à completer **/
-
-        return null;
+        return this.ficheEvt.getSelectedEvenement();
+    }
+    
+    public void removeEvenement(Evenement evt) {
+	this.ficheEvt.removeEvenement(evt);
+    }
+    
+    public void setEvenementSelected() {
+	this.controleur.setEvtSelected(true);
     }
 }
