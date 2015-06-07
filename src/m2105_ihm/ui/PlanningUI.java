@@ -23,6 +23,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.tree.TreeSelectionModel;
 
 import m2105_ihm.Controleur;
+import m2105_ihm.nf.Contact;
 import m2105_ihm.nf.Evenement;
 
 /**
@@ -91,8 +92,16 @@ public class PlanningUI extends JPanel {
         return this.ficheEvt.getSelectedEvenement();
     }
     
+    public Contact getSelectedPtc() {    
+        return this.ficheEvt.getSelectedParticipant();
+    }
+    
     public void removeEvenement(Evenement evt) {
 	this.ficheEvt.removeEvenement(evt);
+    }
+    
+    public void removeContactEvenement(Contact c) {
+	this.ficheEvt.removeContactEvenement(c);
     }
     
     public void setEvenementSelected() {

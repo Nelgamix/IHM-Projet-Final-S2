@@ -125,18 +125,22 @@ public class Controleur {
      * Ajouter un participant à un événement
      */
     public void ajouterParticipantEvenement() {
-    
-       /** Projet **/
-           
+	Evenement e = planningUI.getSelectedEvt();
+	
+	
+	
+	
     }
 
     /**
      * Retire un participant d'un événement
      */
     public void retirerParticipantEvenement() {
-    
-       /** Projet **/
-           
+	Evenement e = planningUI.getSelectedEvt();
+	Contact c = planningUI.getSelectedPtc();
+	
+	e.removeParticipant(c);
+	planningUI.removeContactEvenement(c);
     }
 
     /**

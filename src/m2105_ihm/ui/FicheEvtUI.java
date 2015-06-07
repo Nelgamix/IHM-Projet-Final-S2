@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.basic.BasicListUI;
+import m2105_ihm.nf.Contact;
 import m2105_ihm.nf.Evenement;
 import m2105_ihm.nf.Mois;
 /**
@@ -23,13 +24,14 @@ public class FicheEvtUI extends javax.swing.JPanel {
      */
     private PlanningUI			planning;
     private JList			list;
-    private DefaultListModel<Evenement> model = new DefaultListModel<>();
+    private DefaultListModel<Evenement> modelEvt = new DefaultListModel<>();
     
     private JTextField zOS;
     private JComboBox monsterKill;
     private JComboBox monsterCat;
     private JComboBox monsterDog;
     private JList participants;
+    private DefaultListModel<Contact> modelPtc = new DefaultListModel<>();
     private JButton valider;
     private JButton annuler;
     
@@ -109,7 +111,7 @@ public class FicheEvtUI extends javax.swing.JPanel {
         gbc.weightx = 0;
 	this.add(listPanel, gbc);
 	
-	JPanel pan2 = new JPanel();
+	JPanel pan2 = new JPanel(new BorderLayout());
 	pan2.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createTitledBorder(
                     "Infos"),
@@ -117,7 +119,7 @@ public class FicheEvtUI extends javax.swing.JPanel {
 	
 	/////////////
 	
-	JPanel io = new JPanel(new BorderLayout());
+	JPanel io = new JPanel();
         
         JPanel butttt = new JPanel();
         
@@ -128,7 +130,7 @@ public class FicheEvtUI extends javax.swing.JPanel {
         butttt.add(annuler);
         butttt.add(valider);
         
-        io.add(butttt, BorderLayout.SOUTH);
+        pan2.add(butttt, BorderLayout.SOUTH);
         
         JPanel ios = new JPanel(new GridLayout(3, 2, 10, 10));
         
@@ -159,7 +161,7 @@ public class FicheEvtUI extends javax.swing.JPanel {
         monsterDog = new JComboBox(items3);
         dateOS.add(monsterDog);
         
-        io.add(ios, BorderLayout.CENTER);
+        pan2.add(ios, BorderLayout.CENTER);
         
         ios.add(textOS);
         ios.add(zOS);
@@ -169,11 +171,14 @@ public class FicheEvtUI extends javax.swing.JPanel {
 	textOS = new JLabel("Participants");
 	ios.add(textOS);
 	
-	pan2.add(io);
+	participants = new JList();
+	
+	ios.add(participants);
 	
 	///////
 	
-	gbc.fill = GridBagConstraints.BOTH;
+	gbc.anchor = GridBagConstraints.PAGE_START;
+	gbc.fill = GridBagConstraints.HORIZONTAL;
 	gbc.gridx = 1;
         gbc.gridy = 0;
 	gbc.weightx = 0.8;
@@ -181,7 +186,8 @@ public class FicheEvtUI extends javax.swing.JPanel {
 	
 	this.add(pan2, gbc);
 	
-	list.setModel(model);
+	list.setModel(modelEvt);
+	this.participants.setModel(modelPtc);
     }
 
     /**
@@ -197,6 +203,12 @@ public class FicheEvtUI extends javax.swing.JPanel {
 	this.monsterKill.setSelectedIndex(event.getDateJour() - 1);
 	this.monsterCat.setSelectedItem((Mois)event.getDateMois());
 	this.monsterDog.setSelectedIndex(event.getDateAnnee() - 1970);
+	
+	Contact[] participants = event.getParticipants();
+	modelPtc.clear();
+	for (Contact c : participants) {
+	    modelPtc.addElement(c);
+	}
             
         return false;
     }
@@ -212,12 +224,12 @@ public class FicheEvtUI extends javax.swing.JPanel {
         
 	event.setIntitule(zOS.getText());
         event.setDate(this.monsterKill.getSelectedIndex() + 1, (Mois)this.monsterCat.getSelectedItem(), this.monsterDog.getSelectedIndex() + 1970);
-        
+	
         return true;
     }
     
     public void ajouterEvenementList(Evenement e) {
-	model.addElement(e);
+	modelEvt.addElement(e);
     }
     
     public Evenement getSelectedEvenement() {
@@ -225,6 +237,17 @@ public class FicheEvtUI extends javax.swing.JPanel {
     }
     
     public void removeEvenement(Evenement evt) {
-	model.removeElement(evt);
+	modelEvt.removeElement(evt);
     }
+    
+    public void removeContactEvenement(Contact c) {
+	this.modelPtc.removeElement(c);
+    }
+    
+    public Contact getSelectedParticipant() {
+	return (Contact)participants.getSelectedValue();
+    }
+    
+    
+    
 }
