@@ -4,7 +4,10 @@
 package m2105_ihm.ui;
 
 import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
@@ -58,69 +61,70 @@ public class FicheContactUI extends JPanel {
     
 
     private void initUIComponents() {      
-        
+	
+	GridBagConstraints c = new GridBagConstraints();
+	GridBagConstraints cId = new GridBagConstraints();
+        GridBagConstraints cDh = new GridBagConstraints();
+	
         this.setLayout(new BorderLayout());
 	
-	JPanel global = new JPanel(new GridLayout(2, 1, 20, 20));
+	JPanel global = new JPanel(new GridBagLayout());
 	this.add(global, BorderLayout.CENTER);
         
         identite = new JPanel();
-        identite.setLayout(new GridLayout(6,2));
+        identite.setLayout(new GridBagLayout());
 	identite.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createTitledBorder(
                     "Identité du contact"),
                 BorderFactory.createEmptyBorder(10,10,10,10)));
-        global.add(identite);
+	
+	c.anchor = GridBagConstraints.PAGE_START;
+	c.fill = GridBagConstraints.HORIZONTAL;
+	c.gridx = 0;
+	c.gridy = 0;
+	c.weightx = 1;
+	c.weighty = 0;
+        global.add(identite, c);
         
         dispohobby = new JPanel();
-        dispohobby.setLayout(new GridLayout(2, 2));
+        dispohobby.setLayout(new GridBagLayout());
 	dispohobby.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createTitledBorder(
                     "Ses disponibilités et hobbies"),
                 BorderFactory.createEmptyBorder(10,10,10,10)));
-        global.add(dispohobby);
+	
+	c.anchor = GridBagConstraints.PAGE_START;
+	c.fill = GridBagConstraints.HORIZONTAL;
+	c.gridx = 0;
+	c.gridy = 1;
+	c.weightx = 1;
+	c.weighty = 0.5;
+        global.add(dispohobby, c);
         
         boutons = new JPanel();
         boutons.setLayout(new BorderLayout());
         this.add(boutons, BorderLayout.SOUTH);
         
         dates = new JPanel();
-        dates.setLayout(new GridLayout(1,6));
+        dates.setLayout(new GridLayout(1, 3, 0, 0));
        
         hobbylist = new JPanel();
         hobbylist.setLayout(new GridLayout(2,2));
 
+        champNom = new JTextField(12);
         
-        identite.add(new JLabel("Nom :"));
-        champNom = new JTextField(30);
-        identite.add(champNom);
+        champPrenom = new JTextField(12);
         
-        identite.add(new JLabel("Prenom :"));
-        champPrenom = new JTextField(30);
-        identite.add(champPrenom);
+        champEmail = new JTextField(16);
         
-        identite.add(new JLabel("Email :")); 
-        champEmail = new JTextField(50);
-        identite.add(champEmail);
-        
-        identite.add(new JLabel("Téléphone :"));
         champTel = new JTextField(15);
-        identite.add(champTel);
         
-        identite.add(new JLabel("Region :"));
         Region [] items3 = Region.values();               
         champRegion = new JComboBox(items3);
-        identite.add(champRegion);
-
-        identite.add(new JLabel("Date de naissance :"));
-        identite.add(dates);
-         
-        dispohobby.add(new JLabel("Disponibilité préférée :"));
+        
         DispoSortie [] items = DispoSortie.values();               
         champDisponibilite = new JComboBox(items);
-        dispohobby.add(champDisponibilite);
-        
-        dispohobby.add(new JLabel("Hobbies :"));
+	
         champHobbyS = new JCheckBox(Hobby.SPORT.name());
         hobbylist.add(champHobbyS);
         champHobbyM = new JCheckBox(Hobby.MUSIQUE.name());
@@ -130,9 +134,6 @@ public class FicheContactUI extends JPanel {
         champHobbyC = new JCheckBox(Hobby.CINEMA.name());
         hobbylist.add(champHobbyC);
         
-        dispohobby.add(hobbylist);
-       
-        dates.add(new JLabel("Jour :"));
         Integer[] items5 = new Integer[31] ;
         for (int i=0; i<31; i++) {
             items5[i]=i+1;
@@ -140,12 +141,10 @@ public class FicheContactUI extends JPanel {
         champDateJour = new JComboBox(items5);
         dates.add(champDateJour);
 
-        dates.add(new JLabel("Mois :"));
         Mois [] items4 = Mois.values();
         champDateMois = new JComboBox(items4);
         dates.add(champDateMois);
         
-        dates.add(new JLabel("Annee :"));
         Integer[] items6 = new Integer[100] ;
         for (int i=0; i<100; i++) {
             items6[i]=i+1916;
@@ -171,7 +170,91 @@ public class FicheContactUI extends JPanel {
         });
         
         boutons.add(bouton2,BorderLayout.EAST);
+	
+	// CID
+	cId.gridx = 0;
+	cId.gridy = 0;
+	cId.weightx = 1;
+	cId.weighty = 0;
+	cId.anchor = GridBagConstraints.LINE_END;
+	cId.fill = GridBagConstraints.NONE;
+        identite.add(new JLabel("Nom :"), cId);
+	
+	cId.gridx = 0;
+	cId.gridy = 1;
+	identite.add(new JLabel("Prenom :"), cId);
+	
+	cId.gridx = 0;
+	cId.gridy = 2;
+	identite.add(new JLabel("Email :"), cId); 
+	
+	cId.gridx = 0;
+	cId.gridy = 3;
+	identite.add(new JLabel("Téléphone :"), cId);
+	
+	cId.gridx = 0;
+	cId.gridy = 4;
+	identite.add(new JLabel("Region :"), cId);
+	
+	cId.gridx = 0;
+	cId.gridy = 5;
+	identite.add(new JLabel("Date de naissance :"), cId);
+	
+	cId.gridx = 1;
+	cId.gridy = 0;
+	cId.weightx = 1;
+	cId.weighty = 0;
+	cId.insets = new Insets(4, 40, 4, 0);
+	cId.anchor = GridBagConstraints.CENTER;
+	cId.fill = GridBagConstraints.HORIZONTAL;
+	identite.add(champNom, cId);
+	
+	cId.gridx = 1;
+	cId.gridy = 1;
+	identite.add(champPrenom, cId);
         
+	cId.gridx = 1;
+	cId.gridy = 2;
+	identite.add(champEmail, cId);
+        
+	cId.gridx = 1;
+	cId.gridy = 3;
+	identite.add(champTel, cId);
+        
+	cId.gridx = 1;
+	cId.gridy = 4;
+	identite.add(champRegion, cId);
+
+	cId.gridx = 1;
+	cId.gridy = 5;
+	identite.add(dates, cId);
+	
+	
+	// CDH
+	cDh.gridx = 0;
+	cDh.gridy = 0;
+	cDh.weightx = 0.4;
+	cDh.weighty = 0;
+	cDh.anchor = GridBagConstraints.LINE_END;
+	cDh.fill = GridBagConstraints.NONE;
+        dispohobby.add(new JLabel("Disponibilité préférée :"), cDh);
+	
+	cDh.gridx = 0;
+	cDh.gridy = 1;
+        dispohobby.add(new JLabel("Hobbies :"), cDh);
+	
+	cDh.gridx = 1;
+	cDh.gridy = 0;
+	cDh.weightx = 1;
+	cDh.weighty = 0;
+	cDh.insets = new Insets(4, 40, 4, 0);
+	cDh.anchor = GridBagConstraints.CENTER;
+	cDh.fill = GridBagConstraints.HORIZONTAL;
+        dispohobby.add(champDisponibilite, cDh);
+	
+	cDh.gridx = 1;
+	cDh.gridy = 1;
+        dispohobby.add(hobbylist, cDh);
     }
     
     public boolean setValues(Contact contact) {

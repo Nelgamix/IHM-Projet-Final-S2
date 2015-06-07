@@ -58,7 +58,8 @@ public class PlanningUI extends JPanel {
          */        
         ficheEvt = new FicheEvtUI(this);
 	
-	this.add(ficheEvt);
+	this.setLayout(new BorderLayout());
+	this.add(ficheEvt, BorderLayout.CENTER);
     }
     /**
      * Ajoute une entrée dans la liste de événements

@@ -87,8 +87,8 @@ public class FicheEvtUI extends javax.swing.JPanel {
 	
 	String[] evt = {"Trolololol"};
 	
-	JPanel listPanel = new JPanel();
-	listPanel.setBorder(BorderFactory.createCompoundBorder(
+	JPanel panelList = new JPanel(new BorderLayout());
+	panelList.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createTitledBorder(
                     "Evenements"),
                 BorderFactory.createEmptyBorder(10,10,10,10)));
@@ -97,42 +97,31 @@ public class FicheEvtUI extends javax.swing.JPanel {
 	list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	list.setLayoutOrientation(JList.VERTICAL);
 	list.setVisibleRowCount(-1);
-	list.setPreferredSize(new Dimension(150, 400));
-	JScrollPane listScroller = new JScrollPane(list);
-	listScroller.setPreferredSize(new Dimension(800, 80));
+	//list.setPreferredSize(new Dimension(50, 400));
 	
-	listPanel.add(list);
+	panelList.add(list, BorderLayout.CENTER);
 	
-	GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.LINE_START;
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weightx = 0;
-	this.add(listPanel, gbc);
-	
-	JPanel pan2 = new JPanel(new BorderLayout());
-	pan2.setBorder(BorderFactory.createCompoundBorder(
+	JPanel panelData = new JPanel(new BorderLayout());
+	panelData.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createTitledBorder(
                     "Infos"),
                 BorderFactory.createEmptyBorder(10,10,10,10)));
 	
 	/////////////
-	
-	JPanel io = new JPanel();
         
-        JPanel butttt = new JPanel();
+        JPanel butttt = new JPanel(new BorderLayout());
         
         annuler = new JButton("Annulation");
-        
         valider = new JButton("Validation");
         
-        butttt.add(annuler);
-        butttt.add(valider);
+        butttt.add(annuler, BorderLayout.WEST);
+        butttt.add(valider, BorderLayout.EAST);
         
-        pan2.add(butttt, BorderLayout.SOUTH);
+        panelData.add(butttt, BorderLayout.SOUTH);
         
-        JPanel ios = new JPanel(new GridLayout(3, 2, 10, 10));
+        JPanel ios = new JPanel(new GridBagLayout());
+	GridBagConstraints iosc = new GridBagConstraints();
+	iosc.insets = new Insets(5, 0, 5, 0);
         
         JLabel textOS = new JLabel("Intitulé");
         
@@ -161,33 +150,61 @@ public class FicheEvtUI extends javax.swing.JPanel {
         monsterDog = new JComboBox(items3);
         dateOS.add(monsterDog);
         
-        pan2.add(ios, BorderLayout.CENTER);
+        panelData.add(ios, BorderLayout.NORTH);
         
-        ios.add(textOS);
-        ios.add(zOS);
+	iosc.gridx = 0;
+	iosc.gridy = 0;
+	iosc.weightx = 0.5;
+	iosc.anchor = GridBagConstraints.NORTH;
+	iosc.fill = GridBagConstraints.HORIZONTAL;
+        ios.add(textOS, iosc);
+	
+	iosc.gridx = 1;
+	iosc.gridy = 0;
+        ios.add(zOS, iosc);
+	
         textOS = new JLabel("Date");
-        ios.add(textOS);
-        ios.add(dateOS);
+	iosc.gridx = 0;
+	iosc.gridy = 1;
+        ios.add(textOS, iosc);
+	
+	iosc.gridx = 1;
+	iosc.gridy = 1;
+        ios.add(dateOS, iosc);
+	
 	textOS = new JLabel("Participants");
-	ios.add(textOS);
+	iosc.gridx = 0;
+	iosc.gridy = 2;
+	ios.add(textOS, iosc);
 	
 	participants = new JList();
-	
-	ios.add(participants);
-	
-	///////
-	
-	gbc.anchor = GridBagConstraints.PAGE_START;
-	gbc.fill = GridBagConstraints.HORIZONTAL;
-	gbc.gridx = 1;
-        gbc.gridy = 0;
-	gbc.weightx = 0.8;
-	gbc.weighty = 1;
-	
-	this.add(pan2, gbc);
+	iosc.gridx = 1;
+	iosc.gridy = 2;
+	ios.add(participants, iosc);
 	
 	list.setModel(modelEvt);
 	this.participants.setModel(modelPtc);
+	
+	///////
+	
+	GridBagConstraints gbc = new GridBagConstraints();
+	
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 0;
+	gbc.weighty = 1;
+	add(panelList, gbc);
+	
+	gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+	gbc.fill = GridBagConstraints.BOTH;
+	gbc.gridx = 1;
+        gbc.gridy = 0;
+	gbc.weightx = 1;
+	gbc.weighty = 1;
+	
+	add(panelData, gbc);
     }
 
     /**
