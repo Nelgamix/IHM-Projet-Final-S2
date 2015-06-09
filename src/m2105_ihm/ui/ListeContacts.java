@@ -18,6 +18,7 @@ import m2105_ihm.nf.Contact;
 import m2105_ihm.nf.GroupeContacts;
 
 import java.awt.Component;
+import java.util.ArrayList;
 import javax.swing.UIManager;
 import javax.swing.tree.DefaultTreeCellRenderer;
 /**
@@ -250,7 +251,7 @@ public class ListeContacts extends javax.swing.JPanel  {
      */
     public void showAll() {        
         for(int i = listeContacts.getRowCount(); i >= 0; i--) {
-          listeContacts.expandRow(i);
+	    listeContacts.expandRow(i);
         }
     }
     
@@ -299,9 +300,9 @@ public class ListeContacts extends javax.swing.JPanel  {
         Object selectedItem = null;        
         DefaultMutableTreeNode node;
         
-        if (! listeNoeudContacts.isLeaf()) {
+        if (!listeNoeudContacts.isLeaf()) {
            node = (DefaultMutableTreeNode) listeNoeudContacts.getChildAt(0);
-           data = (NodeData) node.getUserObject();        
+           data = (NodeData) node.getUserObject();
            selectedItem = data.id;           
            highlightSelected(node);
         }
@@ -395,5 +396,22 @@ public class ListeContacts extends javax.swing.JPanel  {
         }
         
         return success;
+    }
+    
+    public Contact[] getContacts() {
+	DefaultTreeModel model = (DefaultTreeModel)listeContacts.getModel();
+	ArrayList<Contact> contacts = new ArrayList<>();
+	NodeData data;
+        DefaultMutableTreeNode node;
+	Object selectedItem;
+	
+	for (int i = 0; i < listeNoeudContacts.getChildCount(); i++) {
+	    node = (DefaultMutableTreeNode) model.getChild(listeNoeudContacts, i);
+	    data = (NodeData) node.getUserObject();
+	    selectedItem = data.id;
+	    contacts.add((Contact) selectedItem);
+	}
+	
+	return contacts.toArray(new Contact[0]);
     }
 }

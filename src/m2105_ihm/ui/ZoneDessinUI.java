@@ -89,11 +89,10 @@ public class ZoneDessinUI extends Canvas  {
      * Efface le dessin
      */
     public void effacer() {
-        
+	
         /** TP 2 : à compléter **/
         polygon.reset();
         this.repaint();
-        
     }
         
     /**
@@ -108,7 +107,6 @@ public class ZoneDessinUI extends Canvas  {
         for (Point p : dessin) {
             polygon.addPoint(p.x, p.y);
             count++;
-            System.out.println("Count2:" + count);
         }
         this.repaint();
     }
@@ -131,7 +129,6 @@ public class ZoneDessinUI extends Canvas  {
     public void addPoint(Point p) {
         this.polygon.addPoint(p.x, p.y);
         count++;
-        System.out.println("Count: " + count);
     }
     
     /*

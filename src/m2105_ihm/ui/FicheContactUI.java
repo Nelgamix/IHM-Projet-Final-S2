@@ -153,21 +153,10 @@ public class FicheContactUI extends JPanel {
         dates.add(champDateAnnee);
         
         bouton1 = new JButton("Annuler");
-        bouton1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                carnet.setContactModified(false);
-                System.out.println("Annuler");
-            }
-        });
+        
         boutons.add(bouton1,BorderLayout.WEST);
         
         bouton2 = new JButton("Valider");
-        bouton2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                carnet.setContactModified(true);
-                System.out.println("Valider");
-            }
-        });
         
         boutons.add(bouton2,BorderLayout.EAST);
 	
@@ -229,7 +218,6 @@ public class FicheContactUI extends JPanel {
 	cId.gridy = 5;
 	identite.add(dates, cId);
 	
-	
 	// CDH
 	cDh.gridx = 0;
 	cDh.gridy = 0;
@@ -264,26 +252,14 @@ public class FicheContactUI extends JPanel {
         champPrenom.setText(contact.getPrenom());
         champDisponibilite.setSelectedItem(contact.getDisponibilite());
         champEmail.setText(contact.getEmail());
-
-        /*for (Hobby h : contact.getHobbies()){
-            if (h==Hobby.CINEMA){
-                champHobbyC.setSelected(true);
-            } else if (h==Hobby.LECTURE){
-                champHobbyL.setSelected(true);
-            } else if (h == Hobby.SPORT){
-                champHobbyS.setSelected(true);
-            } else if (h==Hobby.MUSIQUE){
-                champHobbyM.setSelected(true);
-            } 
-        }*/
         
         champHobbyC.setSelected(false);
         champHobbyL.setSelected(false);
         champHobbyM.setSelected(false);
         champHobbyS.setSelected(false);
       
-        Hobby[] hooobby = contact.getHobbies();
-        for (Hobby h : hooobby) {
+        Hobby[] hobby = contact.getHobbies();
+        for (Hobby h : hobby) {
             if (h == Hobby.CINEMA) {
                 champHobbyC.setSelected(true);
             } else if (h == Hobby.LECTURE) {
@@ -301,8 +277,6 @@ public class FicheContactUI extends JPanel {
         champDateMois.setSelectedItem(contact.getDateNaissanceMois());
         champDateAnnee.setSelectedItem(contact.getDateNaissanceAnnee());
         
-        //cA = contact;
-        
         return true;
 
     }
@@ -314,19 +288,6 @@ public class FicheContactUI extends JPanel {
         contact.setPrenom(champPrenom.getText());
         contact.setDisponibilite((DispoSortie) champDisponibilite.getSelectedItem());
         contact.setEmail(champEmail.getText());
-
-        /*for (Hobby h : contact.getHobbies()){ 
-            contact.removeHobby(h);
-            if (champHobbyC.isSelected()){
-                contact.addHobby(Hobby.CINEMA);
-            } else if (champHobbyL.isSelected()){
-                contact.addHobby(Hobby.LECTURE);
-            } else if (champHobbyS.isSelected()){
-                contact.addHobby(Hobby.SPORT);
-            } else if (champHobbyM.isSelected()){
-                contact.addHobby(Hobby.MUSIQUE);
-            } 
-        }*/
         
         for (Hobby h : contact.getHobbies()) {
             contact.removeHobby(h);
@@ -356,6 +317,19 @@ public class FicheContactUI extends JPanel {
      * Initialise la gestion des événements
      */
     private void initListeners() {
-        /** TP 5 : à compléter **/ 
+        bouton2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                carnet.setContactModified(true);
+                System.out.println("Valider");
+            }
+        });
+	
+	bouton1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                carnet.setContactModified(false);
+                System.out.println("Annuler");
+            }
+        });
+	
     }    
 }

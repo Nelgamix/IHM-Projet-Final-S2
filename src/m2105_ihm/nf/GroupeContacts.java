@@ -200,4 +200,8 @@ public class GroupeContacts implements java.io.Serializable {
     public String toString() {
         return nom;
     }
+    
+    /*public void clearSymboles() {
+	symboles.clear();
+    }*/
 }

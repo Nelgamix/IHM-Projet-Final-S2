@@ -79,6 +79,10 @@ public class CarnetUI extends JPanel {
         add(listeContacts, BorderLayout.WEST);
         add(cardPanel, BorderLayout.CENTER); 
     }
+    
+    public Contact[] getContacts() {
+	return listeContacts.getContacts();
+    }
 
     /**
      * Retourne le contact sélectionné

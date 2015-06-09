@@ -83,16 +83,32 @@ public class BoiteDialogUI {
         
         if (titre == null) { titre = ""; }
         
-        String choix = JOptionPane.showInputDialog(fenetre, titre);
-        System.out.println("RALALOUF " + choix);
-        for (int i = 0; i < groupes.length; i++) {
-            System.out.println("RALA " + groupes[i].getNom());
-            if (groupes[i].getNom().equals(choix)) {
-                res = groupes[i];
-            }
-        }
-        /** TP5 : à compléter **/
+        //String[] choices = { "A", "B", "C", "D", "E", "F" };
+	res = (GroupeContacts) JOptionPane.showInputDialog(null, "Choisissez un groupe",
+	    titre, JOptionPane.QUESTION_MESSAGE, null,
+	    groupes,
+	    groupes[0]);
         
         return res;
     }    
+    
+    /**
+     * Boîte de dialogue choisir un contact à retirer d'un groupe
+     * @param titre titre de la fenêtre
+     * @param groupes liste des contacts existants
+     * @return contact choisi sinon valeur null
+     */    
+    public static Contact afficherChoixMembreGroupe(JFrame fenetre, String titre, Contact [] contact) {
+        Contact res = null;
+        
+        if (titre == null) { titre = ""; }
+        
+        //String[] choices = { "A", "B", "C", "D", "E", "F" };
+	res = (Contact) JOptionPane.showInputDialog(null, "Choisissez un contact",
+	    titre, JOptionPane.QUESTION_MESSAGE, null,
+	    contact,
+	    contact[0]);
+        
+        return res;
+    } 
 }

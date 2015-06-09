@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.plaf.basic.BasicListUI;
 import m2105_ihm.nf.Contact;
 import m2105_ihm.nf.Evenement;
 import m2105_ihm.nf.Mois;
@@ -26,10 +25,10 @@ public class FicheEvtUI extends javax.swing.JPanel {
     private JList			list;
     private DefaultListModel<Evenement> modelEvt = new DefaultListModel<>();
     
-    private JTextField zOS;
-    private JComboBox monsterKill;
-    private JComboBox monsterCat;
-    private JComboBox monsterDog;
+    private JTextField textField;
+    private JComboBox comboJours;
+    private JComboBox comboMois;
+    private JComboBox comboAnnees;
     private JList participants;
     private DefaultListModel<Contact> modelPtc = new DefaultListModel<>();
     private JButton valider;
@@ -97,7 +96,6 @@ public class FicheEvtUI extends javax.swing.JPanel {
 	list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	list.setLayoutOrientation(JList.VERTICAL);
 	list.setVisibleRowCount(-1);
-	//list.setPreferredSize(new Dimension(50, 400));
 	
 	panelList.add(list, BorderLayout.CENTER);
 	
@@ -125,7 +123,7 @@ public class FicheEvtUI extends javax.swing.JPanel {
         
         JLabel textOS = new JLabel("Intitulé");
         
-        zOS = new JTextField();
+        textField = new JTextField();
         
         JPanel dateOS = new JPanel(new GridLayout(1, 3, 5, 5));
         
@@ -141,14 +139,14 @@ public class FicheEvtUI extends javax.swing.JPanel {
             items3[i] = i + 1970;
         }
         
-        monsterKill = new JComboBox(items1);
-        dateOS.add(monsterKill);
+        comboJours = new JComboBox(items1);
+        dateOS.add(comboJours);
         
-        monsterCat = new JComboBox(items2);
-        dateOS.add(monsterCat);
+        comboMois = new JComboBox(items2);
+        dateOS.add(comboMois);
         
-        monsterDog = new JComboBox(items3);
-        dateOS.add(monsterDog);
+        comboAnnees = new JComboBox(items3);
+        dateOS.add(comboAnnees);
         
         panelData.add(ios, BorderLayout.NORTH);
         
@@ -161,7 +159,7 @@ public class FicheEvtUI extends javax.swing.JPanel {
 	
 	iosc.gridx = 1;
 	iosc.gridy = 0;
-        ios.add(zOS, iosc);
+        ios.add(textField, iosc);
 	
         textOS = new JLabel("Date");
 	iosc.gridx = 0;
@@ -215,11 +213,11 @@ public class FicheEvtUI extends javax.swing.JPanel {
     public boolean setValues(Evenement event) {
         if (event == null) { return false; }            
                   
-        this.zOS.setText(event.getIntitule());
+        this.textField.setText(event.getIntitule());
 	
-	this.monsterKill.setSelectedIndex(event.getDateJour() - 1);
-	this.monsterCat.setSelectedItem((Mois)event.getDateMois());
-	this.monsterDog.setSelectedIndex(event.getDateAnnee() - 1970);
+	this.comboJours.setSelectedIndex(event.getDateJour() - 1);
+	this.comboMois.setSelectedItem((Mois)event.getDateMois());
+	this.comboAnnees.setSelectedIndex(event.getDateAnnee() - 1970);
 	
 	Contact[] participants = event.getParticipants();
 	modelPtc.clear();
@@ -239,8 +237,8 @@ public class FicheEvtUI extends javax.swing.JPanel {
         
         if (event == null) { return false; }
         
-	event.setIntitule(zOS.getText());
-        event.setDate(this.monsterKill.getSelectedIndex() + 1, (Mois)this.monsterCat.getSelectedItem(), this.monsterDog.getSelectedIndex() + 1970);
+	event.setIntitule(textField.getText());
+        event.setDate(this.comboJours.getSelectedIndex() + 1, (Mois)this.comboMois.getSelectedItem(), this.comboAnnees.getSelectedIndex() + 1970);
 	
         return true;
     }

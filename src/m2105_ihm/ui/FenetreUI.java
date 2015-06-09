@@ -294,7 +294,7 @@ public class FenetreUI extends JFrame {
                  setMenuEntryEnabled(MENU_CONTACTS, 2, enabled &    contactSelected);
                  setMenuEntryEnabled(MENU_CONTACTS, 3, enabled & (! contactSelected));
                  setMenuEntryEnabled(MENU_CONTACTS, 4, enabled &    contactSelected);
-                 setMenuEntryEnabled(MENU_CONTACTS, 5, enabled &    contactSelected);                 
+                 setMenuEntryEnabled(MENU_CONTACTS, 5, enabled & (! contactSelected));                 
                  break;
 
             case MENU_EVENEMENTS:

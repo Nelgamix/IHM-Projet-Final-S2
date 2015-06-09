@@ -127,8 +127,11 @@ public class Controleur {
     public void ajouterParticipantEvenement() {
 	Evenement e = planningUI.getSelectedEvt();
 	
-	
-	
+	JFrame fen = new JFrame();
+	Contact c = BoiteDialogUI.afficherChoixMembreGroupe(fen, "Choisir contact", carnetUI.getContacts());
+	if (c != null && e != null) {
+	    e.addParticipant(c);
+	}
 	
     }
 
@@ -169,6 +172,8 @@ public class Controleur {
         fenetre = new FenetreUI(this);
         fenetre.addTab(carnetUI, "Carnet");     // onglet carnet
         fenetre.addTab(planningUI, "Planning"); // onglet planning
+	fenetre.pack();
+	fenetre.setLocationRelativeTo(null);
         fenetre.afficher();
     }
         
@@ -205,12 +210,18 @@ public class Controleur {
     public void ajouterContactGroupe() {
         JFrame fen = new JFrame();
         GroupeContacts g = BoiteDialogUI.afficherChoixMembreContact(fen, "Choisir groupe:", nf.getGroupes());
-        g.addContact(carnetUI.getSelectedContact());
+	if (g != null) {
+	    g.addContact(carnetUI.getSelectedContact());
+	}
     }
     
     public void retirerContactGroupe() {
-         JFrame fen = new JFrame();
-        GroupeContacts g = BoiteDialogUI.afficherChoixMembreContact(fen, "Choisir groupe:", nf.getGroupes());
-        g.removeContact(carnetUI.getSelectedContact());       
+        JFrame fen = new JFrame();
+	GroupeContacts g = carnetUI.getSelectedGroupe();
+	Contact c = BoiteDialogUI.afficherChoixMembreGroupe(fen, "Choisir contact", carnetUI.getSelectedGroupe().getContacts());
+	if (g != null && c != null) {
+	    g.removeContact(c);
+	    carnetUI.setGroupeModified(false);
+	}
     }
 }
