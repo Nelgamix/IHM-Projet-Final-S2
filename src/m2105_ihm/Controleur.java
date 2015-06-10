@@ -3,6 +3,7 @@
  */
 package m2105_ihm;
 
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import m2105_ihm.nf.Contact;
 import m2105_ihm.nf.Evenement;
@@ -128,7 +129,18 @@ public class Controleur {
 	Evenement e = planningUI.getSelectedEvt();
 	
 	JFrame fen = new JFrame();
-	Contact c = BoiteDialogUI.afficherChoixMembreGroupe(fen, "Choisir contact", carnetUI.getContacts());
+	Contact[] contacts = nf.getContacts();
+	Contact[] contactsPresents = e.getParticipants();
+	ArrayList<Contact> contactArray = new ArrayList<>();
+	ArrayList<Contact> contactPresentsArray = new ArrayList<>();
+	for (Contact c : contacts) {
+	    contactArray.add(c);
+	}
+	for (Contact c : contactsPresents) {
+	    contactPresentsArray.add(c);
+	}
+	contactArray.removeAll(contactPresentsArray);
+	Contact c = BoiteDialogUI.afficherChoixMembreGroupe(fen, "Choisir contact", contactArray.toArray(new Contact[0]));
 	if (c != null && e != null) {
 	    e.addParticipant(c);
 	}

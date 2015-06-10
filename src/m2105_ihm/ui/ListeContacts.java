@@ -398,20 +398,4 @@ public class ListeContacts extends javax.swing.JPanel  {
         return success;
     }
     
-    public Contact[] getContacts() {
-	DefaultTreeModel model = (DefaultTreeModel)listeContacts.getModel();
-	ArrayList<Contact> contacts = new ArrayList<>();
-	NodeData data;
-        DefaultMutableTreeNode node;
-	Object selectedItem;
-	
-	for (int i = 0; i < listeNoeudContacts.getChildCount(); i++) {
-	    node = (DefaultMutableTreeNode) model.getChild(listeNoeudContacts, i);
-	    data = (NodeData) node.getUserObject();
-	    selectedItem = data.id;
-	    contacts.add((Contact) selectedItem);
-	}
-	
-	return contacts.toArray(new Contact[0]);
-    }
 }
